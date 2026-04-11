@@ -169,7 +169,7 @@ function draw() {
   }
   //受擊反擊系統//
   let backAttack = 0;
-  backAttack=score%300;
+  backAttack=score%400;
   if(backAttack==0&&score>=2500&&ifbackAttack == true){
     spawnB(mid.x,mid.y,0,2,"enemy",false,false);
     spawnB(mid.x,mid.y,2,2,"enemy",false,false);
@@ -187,7 +187,7 @@ function draw() {
   };
   if(score>=4000){
     timer.e++;
-    if(timer.e>=100){
+    if(timer.e>=130){
       timer.e=0;
       spawnB(mid.x,mid.y,2,5,"enemy",true,false);
       spawnB(mid.x,mid.y,-2,5,"enemy",true,false);
@@ -197,14 +197,14 @@ function draw() {
   };
   if(score >=5000){
     timer.f++;
-    if(timer.f>=150){
+    if(timer.f>=200){
       timer.f=0;
       spawnB(mid.x,mid.y,0,8,"enemy",true,true);
     }
   }
   if(score>=8000){
     timer.fun++;
-    if(timer.fun >= 80){
+    if(timer.fun >= 120){
       timer.fun=0;
       fun = Math.floor(Math.random()*100);
       if(fun>=1&&fun<=33){
