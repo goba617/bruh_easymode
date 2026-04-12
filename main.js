@@ -9,7 +9,7 @@ function again(){
   health=3;
   ifOver=false;
   bullet=[];
-  timer={a:0,b:0,c:0,d:0,e:0,cha:0};
+  timer={a:0,b:0,c:0,d:0,e:0,,f:0,fun:0,cha:0};
   player.x = window.innerWidth/2;
   player.y = 600;
   document.getElementById("scores").innerText = "your score=" + score;
@@ -208,18 +208,18 @@ function draw() {
       timer.fun=0;
       fun = Math.floor(Math.random()*100);
       if(fun>=1&&fun<=33){
-        spawnB(mid.x,mid.y,Math.floor(Math.random()*6),Math.floor(Math.random()*6),"enemy",true,false);
+        spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",true,false);
       }
       else if(fun>33&&fun<=66){
-        spawnB(mid.x,mid.y,Math.floor(Math.random()*6),Math.floor(Math.random()*6),"enemy",false,true);
+        spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",false,true);
       }
       else if(fun>66&&fun<=99){
-        spawnB(mid.x,mid.y,Math.floor(Math.random()*6),Math.floor(Math.random()*6),"enemy",true,true);
+        spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",true,true);
       }
       else{
-        spawnB(mid.x,mid.y,Math.floor(Math.random()*6),Math.floor(Math.random()*6),"enemy",true,false);
-        spawnB(mid.x,mid.y,Math.floor(Math.random()*6),Math.floor(Math.random()*6),"enemy",false,true);
-        spawnB(mid.x,mid.y,Math.floor(Math.random()*6),Math.floor(Math.random()*6),"enemy",true,true);
+        spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",true,false);
+        spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",false,true);
+        spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",true,true);
       };
     }
   }
@@ -260,6 +260,25 @@ function draw() {
           ifOver = true;
         };
       };
+        if(b.ifSplitA && b.ifSplitB){
+        b.life++;
+        if(b.life >= 60){
+          b.life = 0;
+          bullet.splice(i,1);
+          i--;
+          
+          spawnB(b.x, b.y, 6, 6, "enemy", false, false);
+          spawnB(b.x, b.y, -6, 6, "enemy", false, false);
+          spawnB(b.x, b.y, 6, -6, "enemy", false, false);
+          spawnB(b.x, b.y, -6, -6, "enemy", false, false);
+          spawnB(b.x, b.y, 8, 0, "enemy", false, false);
+          spawnB(b.x, b.y, 0, 8, "enemy", false, false);
+          spawnB(b.x, b.y, -8, 0, "enemy", false, false);
+          spawnB(b.x, b.y, 0, -8, "enemy", false, false);
+          
+          continue;
+        }
+      }
       if(b.ifSplitA){
         b.life++;
         if(b.life==50){
@@ -290,25 +309,6 @@ function draw() {
           continue;
         };
       };
-      if(b.ifSplitA && b.ifSplitB){
-        b.life++;
-        if(b.life >= 60){
-          b.life = 0;
-          bullet.splice(i,1);
-          i--;
-          
-          spawnB(b.x, b.y, 6, 6, "enemy", false, false);
-          spawnB(b.x, b.y, -6, 6, "enemy", false, false);
-          spawnB(b.x, b.y, 6, -6, "enemy", false, false);
-          spawnB(b.x, b.y, -6, -6, "enemy", false, false);
-          spawnB(b.x, b.y, 8, 0, "enemy", false, false);
-          spawnB(b.x, b.y, 0, 8, "enemy", false, false);
-          spawnB(b.x, b.y, -8, 0, "enemy", false, false);
-          spawnB(b.x, b.y, 0, -8, "enemy", false, false);
-          
-          continue;
-        }
-      }
     };
     if (b.type === "player") {
       if (b.x > boss.x && b.x < boss.x + 200 &&
