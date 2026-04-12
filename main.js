@@ -183,10 +183,11 @@ function draw() {
     ifbackAttack = true;
   }
   if(score>=3500){
-    
+    grade=4;
   };
   if(score>=4000){
     timer.e++;
+    grade=5;
     if(timer.e>=130){
       timer.e=0;
       spawnB(mid.x,mid.y,2,5,"enemy",true,false);
@@ -197,6 +198,7 @@ function draw() {
   };
   if(score >=5000){
     timer.f++;
+    grade=6;
     if(timer.f>=200){
       timer.f=0;
       spawnB(mid.x,mid.y,0,8,"enemy",true,true);
@@ -204,6 +206,7 @@ function draw() {
   }
   if(score>=8000){
     timer.fun++;
+    grade="Have fun!";
     if(timer.fun >= 120){
       timer.fun=0;
       fun = Math.floor(Math.random()*100);
