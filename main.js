@@ -1,15 +1,17 @@
 document.getElementById("die").style.display="none";
 let ifbackAttack = true;
 let fun = 0;
+let funPoint=100;
 //有趣的//
 function again(){
   //重置數值//
   score=0;
+  funPoint=100;
   grades=0;
   health=3;
   ifOver=false;
   bullet=[];
-  timer={a:0,b:0,c:0,d:0,e:0,,f:0,fun:0,cha:0};
+  timer={a:0,b:0,c:0,d:0,e:0,f:0,fun:0,cha:0};
   player.x = window.innerWidth/2;
   player.y = 600;
   document.getElementById("scores").innerText = "your score=" + score;
@@ -25,6 +27,9 @@ function(){
 document.body.style.color = "#000";
 let ifOver = false;
 let health=3;
+function hack() {
+  health = health + 3;
+};
 let grades=0;
 let fps=60;
 let fpsTime=1000/fps;
@@ -109,6 +114,9 @@ function draw() {
     return;
     //直接跳過//
   };
+  if(score>=10000&&funPoint>=30){
+    funPoint=70-((score-10000)/200);
+  }
   when=now;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath(360, 200);
@@ -129,10 +137,16 @@ function draw() {
   timer.cha++;
   //以下使用計時器創造子彈//
   if(score>=0 && score <=4000){
-    if (timer.a >= 50) {
+    if (timer.a >= 35) {
     timer.a = 0;
     spawnB(mid.x, mid.y, 0, 5, "enemy", false, false);
   };
+  if(score>=4000){
+    if(timer.a >= 50){
+      timer.a = 0
+      spawnB(mid.x,mid.y,0,5,"enemy",false,false);
+    }
+  }
   }
   if (score>=1000 && score<=1500){
     timer.c++;
@@ -163,13 +177,13 @@ function draw() {
     grades = 3;
     if(timer.d >= 1){
       timer.d=0;
-      spawnB(mid.x,mid.y,3,1,"enemy",false,false);
-      spawnB(mid.x,mid.y,-3,1,"enemy",false,false);
+      spawnB(mid.x,mid.y,3,2,"enemy",false,false);
+      spawnB(mid.x,mid.y,-3,2,"enemy",false,false);
     }
   }
   //受擊反擊系統//
   let backAttack = 0;
-  backAttack=score%400;
+  backAttack=score%300;
   if(backAttack==0&&score>=2500&&ifbackAttack == true){
     spawnB(mid.x,mid.y,0,2,"enemy",false,false);
     spawnB(mid.x,mid.y,2,2,"enemy",false,false);
@@ -182,13 +196,13 @@ function draw() {
   if(backAttack != 0){
     ifbackAttack = true;
   }
-  if(score>=3500){
-    grade=4;
+  if(score>=2500){
+    grades=4;
   };
   if(score>=4000){
     timer.e++;
-    grade=5;
-    if(timer.e>=130){
+    grades=5;
+    if(timer.e>=150){
       timer.e=0;
       spawnB(mid.x,mid.y,2,5,"enemy",true,false);
       spawnB(mid.x,mid.y,-2,5,"enemy",true,false);
@@ -198,16 +212,16 @@ function draw() {
   };
   if(score >=5000){
     timer.f++;
-    grade=6;
-    if(timer.f>=200){
+    grades=6;
+    if(timer.f>200){
       timer.f=0;
       spawnB(mid.x,mid.y,0,8,"enemy",true,true);
     }
   }
   if(score>=8000){
     timer.fun++;
-    grade="Have fun!";
-    if(timer.fun >= 120){
+    grades="Have fun:)"
+    if(timer.fun >= 60){
       timer.fun=0;
       fun = Math.floor(Math.random()*100);
       if(fun>=1&&fun<=33){
@@ -223,7 +237,7 @@ function draw() {
         spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",true,false);
         spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",false,true);
         spawnB(mid.x,mid.y,Math.floor(Math.random()*11)-5,Math.floor(Math.random()*8),"enemy",true,true);
-      };
+      }
     }
   }
   if(timer.cha>=30){
@@ -253,21 +267,24 @@ function draw() {
       ctx.fillStyle = "#ffffff";
     };
     ctx.fill();
+    
     if(b.type==="enemy"){
       if(b.x > player.x&&b.x < player.x+player.width&&b.y > player.y&&b.y < player.y+player.height){
         bullet.splice(i,1);
         i--;
         health--;
+        
         if(health<0){
           console.log("stop")
           ifOver = true;
         };
       };
-        if(b.ifSplitA && b.ifSplitB){
+      
+      if (b.ifSplitA && b.ifSplitB) {
         b.life++;
-        if(b.life >= 60){
+        if (b.life >= 60) {
           b.life = 0;
-          bullet.splice(i,1);
+          bullet.splice(i, 1);
           i--;
           
           spawnB(b.x, b.y, 6, 6, "enemy", false, false);
