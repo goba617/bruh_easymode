@@ -142,7 +142,7 @@ function draw() {
     spawnB(mid.x, mid.y, 0, 5, "enemy", false, false);
   };
   if(score>=4000){
-    if(timer.a >= 50){
+    if(timer.a >= 70){
       timer.a = 0
       spawnB(mid.x,mid.y,0,5,"enemy",false,false);
     }
@@ -151,7 +151,7 @@ function draw() {
   if (score>=1000 && score<=1500){
     timer.c++;
     grades = 1;
-    if (timer.c >= 35) {
+    if (timer.c >= 40) {
     timer.c = 0;
     sniperB("enemy");
     };
@@ -159,7 +159,7 @@ function draw() {
   if (2300 >=score&&score >= 1600) {
     timer.c++;
     grades = 2;
-    if (timer.c >= 30) {
+    if (timer.c >= 35){
       timer.c = 0;
       sniperB("enemy");
     };
@@ -167,7 +167,7 @@ function draw() {
   if (score >= 2500 ) {
     timer.c++;
     grades = 3;
-    if (timer.c >= 25) {
+    if (timer.c >= 30) {
       timer.c = 0;
       sniperB("enemy");
     };
@@ -221,7 +221,7 @@ function draw() {
   if(score>=8000){
     timer.fun++;
     grades="Have fun:)"
-    if(timer.fun >= 60){
+    if(timer.fun >= 70){
       timer.fun=0;
       fun = Math.floor(Math.random()*100);
       if(fun>=1&&fun<=33){
@@ -240,7 +240,7 @@ function draw() {
       }
     }
   }
-  if(timer.cha>=30){
+  if(timer.cha>=20){
     timer.cha = 0;
     spawnB(player.x+player.width/2,player.y-player.height,0,-20,"player",false,false);
   };
