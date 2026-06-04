@@ -99,8 +99,23 @@ canvas.addEventListener("pointerup", function() {
 });
 //先判斷是否落指//
   canvas.addEventListener("pointermove", function(e) {
-    player.x = e.clientX;
-    player.y = e.clientY;
+    let finalX=e.clientX;
+    let finalY=e.clientY;
+    if(finalX < 0){
+      finalX = 0;
+    }
+    if(finalX >canvas.width-player.width){
+      finalX = canvas.width-player.width;
+    }
+    
+    if (finalY < 0){
+      finalY=0;
+    }
+    if (finalY > canvas.height- player.height) {
+    finalY = canvas.height - player.height;
+    }
+    player.x=finalX;
+    player.y=finalY;
   });
 function draw() {
   if(ifOver){
