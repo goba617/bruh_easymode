@@ -26,7 +26,7 @@ function(){
 }});
 document.body.style.color = "#000";
 let ifOver = false;
-let health=3;
+let health=4;
 function hack() {
   health = health + 3;
 };
