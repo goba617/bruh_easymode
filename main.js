@@ -289,7 +289,7 @@ function draw() {
         i--;
         health--;
         
-        if(health<0){
+        if(health<1){
           console.log("stop")
           ifOver = true;
         };
