@@ -1,5 +1,6 @@
 document.getElementById("die").style.display="none";
 let ifbackAttack = true;
+let h =0;
 let fun = 0;
 let funPoint=100;
 //有趣的//
@@ -16,6 +17,7 @@ function again(){
   player.y = 600;
   document.getElementById("scores").innerText = "your score=" + score;
   document.getElementById("grade").innerText = "LeveL-" + grades;
+
   draw();
 };
 document.addEventListener("click",
@@ -27,9 +29,6 @@ function(){
 document.body.style.color = "#000";
 let ifOver = false;
 let health=4;
-function hack() {
-  health = health + 3;
-};
 let grades=0;
 let fps=60;
 let fpsTime=1000/fps;
@@ -174,7 +173,7 @@ function draw() {
   if (2300 >=score&&score >= 1600) {
     timer.c++;
     grades = 2;
-    if (timer.c >= 35){
+    if (timer.c >= 35) {
       timer.c = 0;
       sniperB("enemy");
     };
@@ -228,7 +227,7 @@ function draw() {
   if(score >=5000){
     timer.f++;
     grades=6;
-    if(timer.f>200){
+    if(timer.f>=200){
       timer.f=0;
       spawnB(mid.x,mid.y,0,8,"enemy",true,true);
     }
@@ -282,19 +281,16 @@ function draw() {
       ctx.fillStyle = "#ffffff";
     };
     ctx.fill();
-    
     if(b.type==="enemy"){
       if(b.x > player.x&&b.x < player.x+player.width&&b.y > player.y&&b.y < player.y+player.height){
         bullet.splice(i,1);
         i--;
         health--;
-        
         if(health<1){
           console.log("stop")
           ifOver = true;
         };
       };
-      
       if (b.ifSplitA && b.ifSplitB) {
         b.life++;
         if (b.life >= 60) {
@@ -356,7 +352,7 @@ function draw() {
         document.getElementById("grade").innerText="LeveL-"+grades;
       };
     };
-    document.getElementById("health2").innerText="your health:"+health;
+    document.getElementById("health2").innerText = "Your health=" + health;
   };
   for (let i = 0; i < bullet.length; i++) {
   let b = bullet[i];
@@ -365,8 +361,8 @@ function draw() {
   if (b.y < 0 || b.y > canvas.height || b.x < 0 || b.x > canvas.width) {
     bullet.splice(i, 1); 
     i--; 
+    };
   };
-};
 };
 draw();
 //啟動//
